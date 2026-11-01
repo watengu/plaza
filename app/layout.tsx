@@ -2,8 +2,21 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://plaza-watengus-projects.vercel.app"),
   title: "広場 | マァスゥ",
   description: "ジャンル別の総合掲示板。投稿は24時間で表示から消えます。",
+  openGraph: {
+    title: "広場 | マァスゥ",
+    description: "ジャンル別の総合掲示板。投稿は24時間で表示から消えます。",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "広場 ― 投稿は24時間で消えます" }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "広場 | マァスゥ",
+    description: "ジャンル別の総合掲示板。投稿は24時間で表示から消えます。",
+    images: ["/og.png"],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
