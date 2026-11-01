@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { sql } from "@/lib/db";
 import { agoLabel, remainingLabel, ttlClass } from "@/lib/format";
+import { NewCards, WriteFab, type NewCard } from "@/app/new-cards";
 
 export const dynamic = "force-dynamic";
 
@@ -17,6 +18,8 @@ export default async function HomePage() {
   let boards: BoardRow[] = [];
   let expiring: ExpiringRow[] = [];
   let notice: string | null = null;
+  let todayCount = 0;
+  let latest: NewCard[] = [];
   if (sql) {
     boards = (await sql`
       select b.slug, b.name, b.icon, b.is_open,
@@ -43,6 +46,29 @@ export default async function HomePage() {
       select body from notices where is_active order by id desc limit 1
     `) as { body: string }[];
     notice = notices[0]?.body ?? null;
+    const today = (await sql`
+      select count(*)::int as c from posts
+      where expires_at > now()
+        and (expires_at at time zone 'Asia/Tokyo')::date = (now() at time zone 'Asia/Tokyo')::date
+    `) as { c: number }[];
+    todayCount = today[0]?.c ?? 0;
+    const latestRows = (await sql`
+      select p.id, p.author_name, p.body, p.created_at, p.expires_at, p.thread_id,
+        b.name as board_name
+      from posts p
+      join threads t on t.id = p.thread_id
+      join boards b on b.id = t.board_id
+      where p.expires_at > now()
+      order by p.created_at desc
+      limit 5
+    `) as Omit<NewCard, "ttl_label" | "ttl_class">[];
+    latest = latestRows.map((r) => ({
+      ...r,
+      created_at: new Date(r.created_at).toISOString(),
+      expires_at: new Date(r.expires_at).toISOString(),
+      ttl_label: remainingLabel(r.expires_at),
+      ttl_class: ttlClass(r.expires_at),
+    }));
   }
 
   return (
@@ -51,6 +77,12 @@ export default async function HomePage() {
         <h1>広場</h1>
         <span className="sub">投稿は24時間で消えます</span>
       </header>
+
+      <p className="today-line">
+        {todayCount > 0
+          ? <>今日消えるカード <span className="n num">{todayCount}</span> 枚</>
+          : "今日消えるカードはありません"}
+      </p>
 
       <section className="hero">
         <p className="hero-lead">残らないから、<br />気軽に書ける。</p>
@@ -77,6 +109,8 @@ export default async function HomePage() {
           </div>
         </>
       )}
+
+      <NewCards cards={latest} />
 
       <div className="section-title">ジャンルの板</div>
       <div className="list">
@@ -118,6 +152,8 @@ export default async function HomePage() {
         )}
         <div className="grow-note">新しい板は、紹介者の提案が3人集まると増えます。</div>
       </div>
+
+      <WriteFab boards={boards.filter((b) => b.is_open).map((b) => ({ slug: b.slug, name: b.name, icon: b.icon }))} />
     </main>
   );
 }

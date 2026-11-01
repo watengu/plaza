@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { sql } from "@/lib/db";
 import { agoLabel } from "@/lib/format";
 import { ThreadForm } from "@/app/forms";
+import { WriteFab } from "@/app/new-cards";
 
 export const dynamic = "force-dynamic";
 
@@ -56,7 +57,10 @@ export default async function BoardPage({ params }: { params: { slug: string } }
         ))}
       </div>
 
-      <ThreadForm boardSlug={params.slug} />
+      <div id="new-thread">
+        <ThreadForm boardSlug={params.slug} />
+      </div>
+      <WriteFab boardSlug={params.slug} />
       <div style={{ height: 90 }} />
     </main>
   );

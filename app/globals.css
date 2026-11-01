@@ -77,7 +77,16 @@ form.post .row { margin-top: 12px; display: flex; align-items: center; gap: 10px
 form.post .note { font-size: 11px; color: #8a7a6d; }
 form.post .err { font-size: 12px; color: #a6272b; margin-top: 8px; }
 
-.fab { position: fixed; right: max(18px, calc(50% - 197px)); bottom: 78px; background: #2b2320; color: #fff; border-radius: 999px; padding: 12px 20px; font-size: 14px; font-weight: 700; box-shadow: 0 4px 12px rgba(0,0,0,.25); }
+.fab { position: fixed; right: max(18px, calc(50% - 197px)); bottom: 78px; background: #2b2320; color: #fff; border: none; border-radius: 999px; padding: 12px 20px; font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.25); z-index: 30; }
+.today-line { padding: 8px 18px 0; font-size: 13px; color: #8a6d3b; font-weight: 700; }
+.today-line .n { color: #a6272b; }
+.new-badge { display: inline-block; margin-left: 7px; font-size: 10px; font-weight: 700; color: #fff; background: #a6272b; border-radius: 999px; padding: 1px 7px; vertical-align: 2px; }
+.sheet-backdrop { position: fixed; inset: 0; background: rgba(43,35,32,.45); z-index: 40; display: flex; align-items: flex-end; justify-content: center; }
+.sheet { background: #fff; width: 100%; max-width: 430px; border-radius: 18px 18px 0 0; padding: 18px 18px 26px; }
+.sheet-title { font-size: 14px; font-weight: 700; margin-bottom: 10px; }
+.sheet-row { display: block; padding: 13px 6px; font-size: 15px; font-weight: 600; border-bottom: 1px solid #f0e7d8; }
+.sheet-row .ic { margin-right: 8px; }
+.sheet-close { margin-top: 14px; width: 100%; background: #f3e3d3; color: #2b2320; border: none; border-radius: 999px; padding: 11px; font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer; }
 nav.bottom { position: fixed; bottom: 0; width: 100%; max-width: 430px; left: 50%; transform: translateX(-50%); background: #fff; border-top: 1px solid #e7dccb; display: flex; }
 nav.bottom div { flex: 1; text-align: center; padding: 9px 0 12px; font-size: 10px; color: #8a7a6d; }
 nav.bottom div.on { color: #a6272b; font-weight: 700; }
