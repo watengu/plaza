@@ -52,9 +52,10 @@ export default async function HomePage() {
         <span className="sub">投稿は24時間で消えます</span>
       </header>
 
-      {notice && (
-        <div className="notice"><span className="pin">お知らせ</span>{notice}</div>
-      )}
+      <section className="hero">
+        <p className="hero-lead">残らないから、<br />気軽に書ける。</p>
+        <p className="hero-sub">アカウント登録はいりません。表示名だけで投稿できて、書いたものは24時間たつと表示から消えます。</p>
+      </section>
 
       {expiring.length > 0 && (
         <>
@@ -79,38 +80,41 @@ export default async function HomePage() {
 
       <div className="section-title">ジャンルの板</div>
       <div className="list">
-        {boards.map((b) =>
-          b.is_open ? (
-            <Link key={b.slug} href={`/board/${b.slug}`} className="board">
-              <div className="ic">{b.icon}</div>
-              <div className="info">
-                <div className="bname">{b.name}</div>
-                <div className="bmeta">
-                  {b.live_count > 0
-                    ? <>スレッド <span className="num">{b.thread_count}</span>件 ・ 最新 {agoLabel(b.latest_at!)}</>
-                    : "まだ流れていません"}
-                </div>
-              </div>
-              <div className="fresh">
-                {b.live_count > 0 ? (
-                  <>
-                    <div className="n num">{b.live_count}</div>
-                    <div className="l">流れてる投稿</div>
-                  </>
-                ) : (
-                  <div className="invite">最初のカードを流す →</div>
-                )}
-              </div>
-            </Link>
-          ) : (
-            <div key={b.slug} className="board locked">
-              <div className="ic">{b.icon}</div>
-              <div className="info">
-                <div className="bname">{b.name}</div>
-                <div className="bmeta">準備中</div>
+        {boards.filter((b) => b.is_open).map((b) => (
+          <Link key={b.slug} href={`/board/${b.slug}`} className="board">
+            <div className="ic">{b.icon}</div>
+            <div className="info">
+              <div className="bname">{b.name}</div>
+              <div className="bmeta">
+                {b.live_count > 0
+                  ? <>スレッド <span className="num">{b.thread_count}</span>件 ・ 最新 {agoLabel(b.latest_at!)}</>
+                  : "まだ流れていません"}
               </div>
             </div>
-          )
+            <div className="fresh">
+              {b.live_count > 0 ? (
+                <>
+                  <div className="n num">{b.live_count}</div>
+                  <div className="l">流れてる投稿</div>
+                </>
+              ) : (
+                <div className="invite">最初のカードを流す →</div>
+              )}
+            </div>
+          </Link>
+        ))}
+
+        {notice && (
+          <div className="notice"><span className="pin">お知らせ</span>{notice}</div>
+        )}
+
+        {boards.some((b) => !b.is_open) && (
+          <div className="soon">
+            <span className="soon-label">準備中</span>
+            {boards.filter((b) => !b.is_open).map((b) => (
+              <span key={b.slug} className="soon-chip">{b.icon} {b.name}</span>
+            ))}
+          </div>
         )}
         <div className="grow-note">新しい板は、紹介者の提案が3人集まると増えます。</div>
       </div>

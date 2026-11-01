@@ -10,8 +10,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja">
       <body>
-        <div className="prov">広場（テスト公開中）― マァスゥ本体とは連携していません</div>
         {children}
+        <footer className="foot">広場（テスト公開中）― マァスゥ本体とは連携していません</footer>
         <nav className="bottom">
           <div><span className="ni">🏠</span>ホーム</div>
           <div><span className="ni">👥</span>友人</div>
