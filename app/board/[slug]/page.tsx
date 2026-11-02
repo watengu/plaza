@@ -29,8 +29,8 @@ export default async function BoardPage({ params }: { params: { slug: string } }
     left join posts p on p.thread_id = t.id
     where t.board_id = ${board.id}
     group by t.id
-    having count(p.id) filter (where p.expires_at > now()) > 0
-    order by max(p.created_at) desc
+    order by (count(p.id) filter (where p.expires_at > now()) > 0) desc,
+      max(p.created_at) desc
   `) as ThreadRow[];
 
   return (
@@ -46,12 +46,22 @@ export default async function BoardPage({ params }: { params: { slug: string } }
           <p className="empty-note">まだ流れていません。最初のスレッドを立ててみてください。</p>
         )}
         {threads.map((t) => (
-          <Link key={t.id} href={`/thread/${t.id}`} className="thread-row">
-            <div className="t">{t.fresh ? <span className="hot-mark">{t.title}</span> : t.title}</div>
+          <Link key={t.id} href={`/thread/${t.id}`} className={t.live_count > 0 ? "thread-row" : "thread-row ended"}>
+            <div className="t">{t.fresh && t.live_count > 0 ? <span className="hot-mark">{t.title}</span> : t.title}</div>
             <div className="m">
               <span>{t.starter_name}</span>
-              <span>カード <span className="num">{t.live_count}</span>枚</span>
-              <span>最新 {agoLabel(t.latest_at!)}</span>
+              {t.live_count > 0 ? (
+                <>
+                  <span>カード <span className="num">{t.live_count}</span>枚</span>
+                  <span>最新 {agoLabel(t.latest_at!)}</span>
+                </>
+              ) : (
+                <>
+                  <span className="ended-tag">終了</span>
+                  <span>カード 0枚</span>
+                  {t.latest_at && <span>最終 {agoLabel(t.latest_at)}</span>}
+                </>
+              )}
             </div>
           </Link>
         ))}
