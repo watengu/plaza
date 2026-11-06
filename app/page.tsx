@@ -85,23 +85,22 @@ export default async function HomePage() {
         <span className="sub">投稿は24時間で消えます</span>
       </header>
 
-      {/* S1 FV */}
+      {/* FV */}
       <section className="fv">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/images/salon.jpg" alt="" />
         <div className="fv-ov">
           <div className="fv-kick">マァスゥの広場</div>
           <p className="fv-claim">今日の話は、<br />今日しかできない。</p>
-          <p className="fv-sub">登録はいりません。表示名だけで書けて、カードは24時間で消えます。いま流れている話に、今日だけ混ざれます。</p>
-          <a className="fv-cta" href="#boards">＋ カードを流す</a>
+          <p className="fv-sub">登録はいりません。表示名だけで書けて、カードは24時間で消えます。</p>
+          <a className="fv-cta" href="#boards">＋ 流す</a>
           <a className="fv-cta2" href="#flow">流れているカードを見る ↓</a>
         </div>
       </section>
 
-      {/* S2 証拠：流れている実物 */}
+      {/* 流れている実物 */}
       <div id="flow" className="proof-head">
         <h2 className="sec-h">開いた瞬間、もう流れている。</h2>
-        <p className="sec-lead">広場の証拠は、数字ではなく中身です。いま生きているカードを、そのまま置きます。</p>
         <p className="today-line" style={{ padding: "8px 0 0" }}>
           {todayCount > 0
             ? <>今日消えるカード <span className="n num">{todayCount}</span> 枚</>
@@ -139,59 +138,13 @@ export default async function HomePage() {
       <NewCards cards={latest} />
       {latest.length === 0 && expiring.length === 0 && (
         <p className="empty-note" style={{ padding: "4px 18px 0" }}>
-          いま流れているカードはありません。下の板から、最初のカードを流せます。
+          いま流れているカードはありません。下の板から流せます。
         </p>
       )}
 
-      {/* S3 安全 */}
-      <section className="safety">
-        <h2>知らない人と、<br />直接つながらない。</h2>
-        <div className="spt"><div className="sn">1</div><div><b>匿名じゃありません</b><p>カードには表示名とプロフィールが出ます。捨てアカの荒らしは、仕組みの側で入り口を狭くします。</p></div></div>
-        <div className="spt"><div className="sn">2</div><div><b>連絡は、許可制です</b><p>広場から直接DMはできません。エンカ申請に相手が許可して、初めてマァスゥのつながりになります。</p></div></div>
-        <div className="spt"><div className="sn">3</div><div><b>書いたものは、消えます</b><p>カードは24時間で表示から消えます。残り続ける前提の場所では書けないことも、ここでは書けます。</p></div></div>
-      </section>
-
-      {/* S4 機能1 お知らせ固定 */}
-      <section className="feat">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/interior.jpg" alt="" />
-        <div className="feat-no">機能 01 ― お知らせ固定</div>
-        <h2>大事な話は、一番上に。</h2>
-        <p>運営からの連絡と、板ごとの大事なカードは、流れの上に固定されます。流れて消える場所だからこそ、見逃してはいけないものは止めておく。</p>
-      </section>
-
-      {/* S5 機能2 消える */}
-      <section className="feat">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/date.jpg" alt="" />
-        <div className="feat-no">機能 02 ― 24時間で消える</div>
-        <h2>残らないから、正直に書ける。</h2>
-        <p>カードには残り時間がつきます。終わりが近いほど、時間の表示は熱を持ちます。今日の相談は、今日のうちに。</p>
-        <div className="chips">
-          <span className="chip">投稿したて　23:59:41</span>
-          <span className="chip">あと少し　2:41:08</span>
-          <span className="chip hot">まもなく消える　24:10</span>
-        </div>
-        <p className="chip-note">残り時間の表示例です</p>
-      </section>
-
-      {/* S6 機能3 エンカ申請 */}
-      <section className="feat">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/images/fiore.jpg" alt="" />
-        <div className="feat-no">機能 03 ― エンカ申請</div>
-        <h2>気になったら、申請ひとつ。</h2>
-        <p>広場は出会いの入口ですが、連絡先の交換場所ではありません。つながり方は、マァスゥのルール通りです。</p>
-        <div className="steps">
-          <div className="step"><div className="sn2">1</div><div><b>カードにエンカ申請</b><p>気になる投稿者に、申請を1つ送ります</p></div></div>
-          <div className="step"><div className="sn2">2</div><div><b>相手が許可したら、つながる</b><p>許可されなければ、それ以上は何も起きません</p></div></div>
-          <div className="step"><div className="sn2">3</div><div><b>最初はスタンプだけ、3日で判定</b><p>マァスゥの接続ルールが、そのまま適用されます</p></div></div>
-        </div>
-      </section>
-
-      {/* S7 用途＝板 */}
+      {/* 板 */}
       <div id="boards" className="proof-head" style={{ paddingTop: 26 }}>
-        <h2 className="sec-h">あなたの場面は、どの板ですか。</h2>
+        <h2 className="sec-h">板を選ぶ</h2>
         <p className="sec-lead">板はジャンルごとの入口です。新しい板は、紹介者の提案が3人集まると増えます。</p>
       </div>
       <div className="list" style={{ paddingBottom: 8 }}>
@@ -209,13 +162,11 @@ export default async function HomePage() {
               </div>
             </div>
             <div className="fresh">
-              {b.live_count > 0 ? (
+              {b.live_count > 0 && (
                 <>
                   <div className="n num">{b.live_count}</div>
                   <div className="l">流れてる投稿</div>
                 </>
-              ) : (
-                <div className="invite">最初のカードを流す →</div>
               )}
             </div>
           </Link>
@@ -229,24 +180,17 @@ export default async function HomePage() {
             ))}
           </div>
         )}
+        <Link className="about-link" href="/about">広場について（仕組み・約束）→</Link>
       </div>
 
-      {/* S8 約束の帯 */}
-      <section className="promise">
-        <h2>広場の約束</h2>
-        <div className="pli">実在のカードだけを置きます。サンプルの声は作りません</div>
-        <div className="pli">消える時間を、すべてのカードに表示します</div>
-        <div className="pli">連絡は許可制。広場から直接のDMはできません</div>
-      </section>
-
-      {/* S9 最終CTA */}
+      {/* 最終CTA */}
       <section className="fv final">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/images/salon.jpg" alt="" />
         <div className="fv-ov">
           <p className="fv-claim" style={{ fontSize: 25 }}>明日の広場は、<br />また別の話です。</p>
-          <p className="fv-sub">今日のカードは、明日にはもうありません。最初の1枚は、あなたの話から。</p>
-          <a className="fv-cta" href="/board/chat#new-thread">＋ 最初のカードを流す</a>
+          <p className="fv-sub">今日のカードは、明日にはもうありません。</p>
+          <a className="fv-cta" href="#boards">＋ 流す</a>
         </div>
       </section>
       <div style={{ height: 110 }} />

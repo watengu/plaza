@@ -88,15 +88,15 @@ form.post .err { font-size: 12px; color: #a6272b; margin-top: 8px; }
 .sheet-row .ic { margin-right: 8px; }
 .sheet-close { margin-top: 14px; width: 100%; background: #f3e3d3; color: #2b2320; border: none; border-radius: 999px; padding: 11px; font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer; }
 nav.bottom { position: fixed; bottom: 0; width: 100%; max-width: 430px; left: 50%; transform: translateX(-50%); background: #fff; border-top: 1px solid #e7dccb; display: flex; }
-nav.bottom div { flex: 1; text-align: center; padding: 9px 0 12px; font-size: 10px; color: #8a7a6d; }
+nav.bottom div, nav.bottom a { flex: 1; text-align: center; padding: 9px 0 12px; font-size: 10px; color: #8a7a6d; }
 nav.bottom div.on { color: #a6272b; font-weight: 700; }
 nav.bottom .ni { font-size: 19px; display: block; margin-bottom: 1px; }
 .empty-note { padding: 6px 18px 0; font-size: 12px; color: #8a7a6d; line-height: 1.7; }
 
 /* === 1案（BAND分解ベース）2026-11-02 === */
 .fv { position: relative; margin-top: 10px; }
-.fv img { width: 100%; height: 470px; object-fit: cover; object-position: center 15%; display: block; }
-.fv.final img { height: 420px; }
+.fv img { width: 100%; height: 330px; object-fit: cover; object-position: center 15%; display: block; }
+.fv.final img { height: 300px; }
 .fv-ov { position: absolute; left: 0; right: 0; bottom: 0; padding: 20px 18px; background: linear-gradient(transparent, rgba(30,20,14,.88) 45%); color: #fff; }
 .fv-kick { font-size: 11px; letter-spacing: .22em; font-weight: 700; opacity: .9; }
 .fv-claim { font-size: 30px; font-weight: 900; line-height: 1.35; margin-top: 8px; }
@@ -133,3 +133,9 @@ nav.bottom .ni { font-size: 19px; display: block; margin-bottom: 1px; }
 .pli::before { content: "—"; opacity: .7; }
 .thread-row.ended { opacity: .62; }
 .thread-row .m .ended-tag { color: #a6272b; font-weight: 700; }
+
+/* === 操作性修正 2026-11-06 === */
+.backbtn { display: inline-flex; align-items: center; min-height: 44px; margin: 10px 14px 0; padding: 10px 18px; background: #fff; border: 1px solid #e7dccb; border-radius: 999px; font-size: 14px; font-weight: 700; color: #2b2320; font-family: inherit; cursor: pointer; box-shadow: 0 1px 4px rgba(43,35,32,.08); }
+.name-note { font-size: 12.5px; color: #6d5c4c; margin: 10px 0 2px; }
+.name-change { margin-left: 10px; background: none; border: none; color: #a6272b; font-size: 12px; font-weight: 700; font-family: inherit; cursor: pointer; text-decoration: underline; padding: 6px 2px; }
+.about-link { display: block; margin: 16px 4px 0; font-size: 13px; font-weight: 700; color: #a6272b; }

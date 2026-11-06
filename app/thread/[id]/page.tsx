@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { sql } from "@/lib/db";
 import { remainingLabel, ttlClass } from "@/lib/format";
-import { EnkaButton, PostForm } from "@/app/forms";
+import { BackButton, EnkaButton, PostForm } from "@/app/forms";
+import { WriteFab } from "@/app/new-cards";
 
 export const dynamic = "force-dynamic";
 
@@ -33,7 +33,7 @@ export default async function ThreadPage({ params }: { params: { id: string } })
 
   return (
     <main>
-      <Link className="back" href={`/board/${thread.board_slug}`}>← {thread.board_name}の板</Link>
+      <BackButton fallback={`/board/${thread.board_slug}`} />
       <header className="top">
         <h1 style={{ fontSize: 19, lineHeight: 1.5 }}>{thread.title}</h1>
       </header>
@@ -63,7 +63,10 @@ export default async function ThreadPage({ params }: { params: { id: string } })
         ))}
       </div>
 
-      <PostForm threadId={threadId} />
+      <div id="new-card">
+        <PostForm threadId={threadId} />
+      </div>
+      <WriteFab thread />
       <div style={{ height: 90 }} />
     </main>
   );

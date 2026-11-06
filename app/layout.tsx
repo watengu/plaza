@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -26,10 +27,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <footer className="foot">広場（テスト公開中）― マァスゥ本体とは連携していません</footer>
         <nav className="bottom">
-          <div><span className="ni">🏠</span>ホーム</div>
-          <div><span className="ni">👥</span>友人</div>
-          <div className="on"><span className="ni">🧭</span>広場</div>
-          <div><span className="ni">⚙️</span>設定</div>
+          <Link href="/"><span className="ni">🏠</span>ホーム</Link>
+          <Link href="/board/beauty"><span className="ni">💄</span>美容・コーデ</Link>
+          <Link href="/board/chat"><span className="ni">🍵</span>雑談</Link>
+          <Link href="/about"><span className="ni">❓</span>広場について</Link>
         </nav>
       </body>
     </html>

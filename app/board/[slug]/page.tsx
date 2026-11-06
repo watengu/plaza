@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { sql } from "@/lib/db";
 import { agoLabel } from "@/lib/format";
-import { ThreadForm } from "@/app/forms";
+import { BackButton, ThreadForm } from "@/app/forms";
 import { WriteFab } from "@/app/new-cards";
 
 export const dynamic = "force-dynamic";
@@ -35,7 +35,7 @@ export default async function BoardPage({ params }: { params: { slug: string } }
 
   return (
     <main>
-      <Link className="back" href="/">← 広場トップ</Link>
+      <BackButton fallback="/" />
       <header className="top">
         <h1>{board.icon} {board.name}</h1>
         <span className="sub">投稿は24時間で消えます</span>

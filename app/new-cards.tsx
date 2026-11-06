@@ -64,13 +64,19 @@ export function NewCards({ cards }: { cards: NewCard[] }) {
 
 export type OpenBoard = { slug: string; name: string; icon: string };
 
-/** 「流す」固定ボタン。トップ＝板を選ぶシート、板＝その画面のフォームへスクロール。 */
-export function WriteFab({ boards, boardSlug }: { boards?: OpenBoard[]; boardSlug?: string }) {
+/** 「流す」固定ボタン（全画面で同じ形・同じ動詞）。トップ＝板を選ぶシート、板・スレッド＝その画面のフォームへスクロール。 */
+export function WriteFab({ boards, boardSlug, thread }: { boards?: OpenBoard[]; boardSlug?: string; thread?: boolean }) {
   const [open, setOpen] = useState(false);
+
+  if (thread) {
+    return (
+      <a className="fab" href="#new-card">＋ 流す</a>
+    );
+  }
 
   if (boardSlug) {
     return (
-      <a className="fab" href="#new-thread">＋ 立てる</a>
+      <a className="fab" href="#new-thread">＋ 流す</a>
     );
   }
 
